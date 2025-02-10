@@ -22,10 +22,12 @@ jobs:
 
     - name: Build APK
       run: |
-        # Your build commands here
+        # Replace this command with the actual command to build the APK
+        # Ensure the output path is correct
+        buildozer android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: apk
-        path: path/to/your/apk/file.apk
+        path: bin/*.apk  # Update this path to match the actual location where the APK is saved
