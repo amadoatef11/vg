@@ -5,23 +5,27 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Clone the repo
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          sudo apt update && sudo apt install -y python3-pip openjdk-17-jdk
-          pip install --upgrade buildozer cython
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.x'
 
-      - name: Initialize Buildozer
-        run: buildozer init
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
 
-      - name: Build APK
-        run: buildozer -v android debug
+    - name: Build APK
+      run: |
+        # Your build commands here
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: Kivy-APK
-          path: bin/*.apk
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      with:
+        name: apk
+        path: path/to/your/apk/file.apk
