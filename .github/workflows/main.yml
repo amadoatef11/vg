@@ -19,11 +19,12 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+        pip install buildozer  # Ensure buildozer is installed
 
     - name: Build APK
       run: |
-        # Replace this command with the actual command to build the APK
         # Ensure the output path is correct
+        buildozer init  # Initialize buildozer if not already done
         buildozer android debug
 
     - name: Upload APK
