@@ -18,18 +18,18 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install --upgrade setuptools  # هذا سيقوم بتثبيت distutils
+        pip install --upgrade setuptools  # This will install distutils
         pip install -r requirements.txt
-        pip install buildozer  # تأكد من تثبيت buildozer
+        pip install buildozer Cython  # Ensure buildozer and Cython are installed
 
     - name: Build APK
       run: |
-        # تأكد من أن مسار المخرجات صحيح
-        buildozer init  # تهيئة buildozer إذا لم يتم ذلك بالفعل
+        # Ensure the output path is correct
+        buildozer init  # Initialize buildozer if not already done
         buildozer android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: apk
-        path: bin/*.apk  # تحديث هذا المسار ليتوافق مع الموقع الفعلي حيث يتم حفظ ملف APK
+        path: bin/*.apk  # Update this path to match the actual location where the APK is saved
